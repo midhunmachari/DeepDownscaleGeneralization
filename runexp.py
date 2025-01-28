@@ -126,7 +126,7 @@ class RunExperiments:
                     varname = 'prec', 
                     start_date = "2001-01-01",  # Edit here
                     end_date   = "2023-12-31",  # Edit here
-                    tag = f"{box_id}_det", # Edite here
+                    tag = f"{box_id}_det00", # Edite here
                 )
 
             del mt
