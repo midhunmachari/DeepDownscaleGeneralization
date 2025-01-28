@@ -20,7 +20,6 @@ class RunExperiments:
     def __init__(
             self, 
             prefix, 
-            inp_id, 
             exp_id, 
             data_path, 
             save_path, 
@@ -32,7 +31,6 @@ class RunExperiments:
             ):
         
         self.prefix = prefix
-        self.expset_id = inp_id
         self.exp_id = exp_id
         self.data_path = data_path
         self.save_path = save_path
@@ -73,7 +71,7 @@ class RunExperiments:
 
         for model_id in self.models_dict.keys():
 
-            expname = f"{self.prefix}_{self.expset_id}_{self.exp_id}_{model_id}"
+            expname = f"{self.prefix}_{self.exp_id}_{model_id}"
             print(f'\nInitiate experiment: {expname}')
             print('-'*100)
 
