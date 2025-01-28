@@ -100,7 +100,7 @@ class RunExperiments:
                 mt.generate_data_and_build_netcdf(
                     [X_test, S_test], 
                     model_path = None,
-                    refd_path=self.get_ref_path(box), 
+                    refd_path=self.get_ref_path(box='C01'), 
                     save_raw_npy=True, # Edit here
                     build_netcdf=True, # Edit here
                     varname = 'prec', 
