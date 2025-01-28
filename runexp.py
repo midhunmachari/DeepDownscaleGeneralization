@@ -10,7 +10,7 @@ import gc
 import numpy as np
 import xarray as xr
 import tensorflow as tf
-from utils import configure_model, loadstack_data_pairs, load_checkpoints
+from utils import configure_model, loadstack_data_pairs
 
 from ai4klima.tensorflow.train import ModelTraining, SRGAN
 
