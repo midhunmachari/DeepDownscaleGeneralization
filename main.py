@@ -69,9 +69,9 @@ def main(prefix, exp_id, epochs, data_path, save_path, refd_path, models_dict):
             )
         
         if exp_id == 'e01': # Train deterministially
-            re.experiment(epochs, bs, add_inputs_noise=False)
+            re.experiment(epochs, bs, add_input_noise=False)
         elif exp_id == 'e02': # Train with noise
-            re.experiment(epochs, bs, add_inputs_noise=True)
+            re.experiment(epochs, bs, add_input_noise=True)
         else:
             raise ValueError(f"Invalid option {exp_id}. Availbale options: 'e01' or 'e02'.")
 
