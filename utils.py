@@ -136,7 +136,6 @@ def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add
             input_shape = input_shape, 
             input_shape_2 = input_shape_2, 
             ups_factors = (2,2,2),
-            input_shape_2=None,
             output_activation='linear',
             n_filters = 64,
             n_res_blocks = 16, 
