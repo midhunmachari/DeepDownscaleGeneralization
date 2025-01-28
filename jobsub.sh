@@ -9,11 +9,11 @@
 #SBATCH --time=72:00:00
 
 ####################### EDIT BELOW #######################
-EXPID_LIST=(e01)
-
-PREFIX="${1:-p02}"   
+PREFIX="${1:-p02a}"   
 EPOCHS="${2:-201}"
 SCRIPTNAME='main.py' 
+
+EXP_ID=e01
 ####################### EDIT ABOVE #######################
 
 # Display help message if "--help" is passed
