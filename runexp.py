@@ -165,8 +165,8 @@ class RunExperiments:
                     suffix = suffix,
                     )
                 mt.train_by_fit(
-                    train_data = (X_train, y_train, S_train), 
-                    val_data = (X_val, y_val, S_val), 
+                    train_data = (X_train, S_train, y_train), 
+                    val_data = (X_val, S_val, y_val), 
                     epochs = epochs,  # Edit here
                     batch_size = bs, 
                     monitor="val_mean_absolute_error",
@@ -205,8 +205,8 @@ class RunExperiments:
                     suffix = suffix,
                     )
                 mt.train(
-                    train_data = (X_train, y_train),
-                    val_data = (X_val, y_val),
+                    train_data = (X_train, S_train, y_train),
+                    val_data = (X_val, S_train, y_val),
                     epochs = epochs, 
                     batch_size = bs,
                     monitor= "val_mean_absolute_error", 
