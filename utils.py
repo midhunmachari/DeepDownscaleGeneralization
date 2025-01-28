@@ -158,7 +158,6 @@ def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add
             layer_N=[64, 96, 128, 160],
             activation='prelu',
             ups_method='bilinear',
-            attention_on=False,  
             add_input_noise=add_input_noise, # Edit here
             input_noise_stddev=0.1,
             input_noise_exclude_channels=-1,
