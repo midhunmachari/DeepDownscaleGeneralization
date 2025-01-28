@@ -13,7 +13,7 @@ EXPID_LIST=(e01)
 INPID_LIST=(s01)
 
 PREFIX="${1:-p02}"   
-EPOCHS="${2:-21}"
+EPOCHS="${2:-201}"
 SCRIPTNAME='main.py' 
 ####################### EDIT ABOVE #######################
 

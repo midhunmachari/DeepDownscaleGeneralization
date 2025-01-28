@@ -26,27 +26,27 @@ from ai4klima.tensorflow.losses import weighted_mae
 
 lr_dict = {
     'r1e4' : [1e-4, 1e-4],
-    'r7e4' : [7e-4, 7e-4],
-    'r2e4' : [2e-4, 2e-4],
-    'r3e4' : [3e-4, 3e-4],
-    'r1e5' : [1e-5, 1e-5],
-    'r1e6' : [1e-6, 1e-6],
+    # 'r7e4' : [7e-4, 7e-4],
+    # 'r2e4' : [2e-4, 2e-4],
+    # 'r3e4' : [3e-4, 3e-4],
+    # 'r1e5' : [1e-5, 1e-5],
+    # 'r1e6' : [1e-6, 1e-6],
     }
 
 bs_dict = {
-    'b64' : 64,
-    'b32' : 32,
-    'b16' : 16,
-    'b08' : 8,
+   'b32' : 32,
+    # 'b64' : 64,
+    # 'b16' : 16,
+    # 'b08' : 8,
     }
 
 losses_dict = {
     'wmae': weighted_mae,
     }
 
-def main(prefix, inp_id, exp_id, epochs, data_path, save_path, refd_path, models_dict, ckpts_dict):
+def main(prefix, inp_id, exp_id, epochs, data_path, save_path, refd_path, models_dict):
 
-    if not (lr_dict and bs_dict and models_dict and ckpts_dict):
+    if not (lr_dict and bs_dict and models_dict and losses_dict):
         raise ValueError("One or more required dictionaries are empty. Please check the input.")
 
     ################################
@@ -69,19 +69,16 @@ def main(prefix, inp_id, exp_id, epochs, data_path, save_path, refd_path, models
             loss_obj = loss,
             ckpts_dict=None
             )
-            
-        if exp_id=='e01':
-            re.experiment_01(epochs, bs)  # E01: TRAIN AND VALIDATE ON B1, B2, B3. DEPLOY IT TO GENERATE TEST ON EACH DOMAIN.
-        elif exp_id=='e02': 
-            re.experiment_01(epochs, bs)  # E02: RETRAIN R01 MODELS AND GENERATE TEST ON EACH DOMAIN SEPARATE 
-        elif exp_id=='e03':
-            re.experiment_03(epochs, bs)  # E03: TRAIN, VALIDATE AND GENERATE TEST ON EACH DOMAIN SEPARATE.
-        elif exp_id=='e04':
-            re.experiment_04(epochs, bs)  # E04: TRAIN ON GLOBAL POOL AND GENERATE TEST ON EACH DOMAIN.
-        else:
-            raise ValueError(f"Invalid exp_id: {exp_id}. Expected one of ['e01', 'e02', 'e03', 'e04'].")
         
+        if exp_id == 'e01': # Train deterministially
+            re.experiment(epochs, bs, add_inputs_noise=False)
+        elif exp_id == 'e02': # Train with noise
+            re.experiment(epochs, bs, add_inputs_noise=True)
+        else:
+            raise ValueError(f"Invalid option {exp_id}. Availbale options: 'e01' or 'e02'.")
+
         del re        # Delete the experiment object
+
         gc.collect()  # Trigger garbage collection
         print(f"Resources cleared for experiment: {expname}")
             
@@ -109,23 +106,13 @@ if __name__ == "__main__":
 
     models_dict = {
         'm01': ['fsrcnn',  None],         # FSRCNN
-        'm02': ['srdrn' ,  None],         # SRDRN
-        'm03': ['unet'  ,  None],         # UNET
-        'm04': ['aunet' ,  None],         # AUNET
-        'm05': ['srdrn' , 'sigmoid_dis'], # SR-GAN
-        'm06': ['unet'  , 'sigmoid_dis'], # UNET-GAN  
-        'm07': ['aunet' , 'sigmoid_dis'], # AUNET-GAN    
-        }
-
-    # Edit here for experiment02
-    ckpts_dict = {
-        'm01': ['gen.keras', None],         # FSRCNN
-        'm02': ['gen.keras', None],         # SRDRN
-        'm03': ['gen.keras', None],         # UNET
-        'm04': ['gen.keras', None],         # AUNET
-        'm05': ['gen.keras', 'dis.keras'],  # SR-GAN
-        'm06': ['gen.keras', 'dis.keras'],  # UNET-GAN   
-        'm07': ['gen.keras', 'dis.keras'],  # AUNET-GAN 
+        'm02': ['edrn'  ,  None],         # EDRN
+        'm03': ['srdrn' ,  None],         # SRDRN
+        'm04': ['unet'  ,  None],         # UNET
+        'm05': ['aunet' ,  None],         # AUNET
+        'm06': ['srdrn' , 'sigmoid_dis'], # SR-GAN  
+        'm07': ['unet'  , 'sigmoid_dis'], # UNET-GAN
+        'm08': ['aunet' , 'sigmoid_dis'], # AUNET-GAN    
         }
 
     main(
@@ -137,7 +124,6 @@ if __name__ == "__main__":
         save_path = SAVE_PATH,
         refd_path = REFD_PATH,
         models_dict = models_dict,
-        ckpts_dict = ckpts_dict,
         )
     
 
