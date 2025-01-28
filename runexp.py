@@ -57,7 +57,7 @@ class RunExperiments:
         return f"{self.refd_path}/{box}_GRID_INFO.nc" # Edit here 
     
     ################################################# EXP: E01 DETERMINISTIC #################################################
-    def experiment(self, epochs, bs, add_inputs_noise):
+    def experiment(self, epochs, bs, add_input_noise):
         """
         E01: TRAIN AND VALIDATE ON B1, B2, B3. DEPLOY IT TO GENERATE TEST ON EACH DOMAIN.
         """
@@ -87,7 +87,7 @@ class RunExperiments:
                                     val_data = val_data, 
                                     epochs = epochs, 
                                     bs = bs, 
-                                    add_inputs_noise = add_inputs_noise,
+                                    add_input_noise = add_input_noise,
                                     )
 
             # Generate the test netcdf; Loop through all boxes
@@ -108,7 +108,7 @@ class RunExperiments:
                     tag = box_id, # Edite here
                 )
 
-            if add_inputs_noise:  
+            if add_input_noise:  
                 ### Prepare 10 ensemble preciction over NE
                 for i in range(1,13):
                     X_test, _, S_test = loadstack_data_pairs('C01', self.data_path, bounds=self.test_bounds, add_noise=True, noise_stddev=0.1) # Edit here
@@ -132,7 +132,7 @@ class RunExperiments:
             print('\nEND OF EXPERIMENT-01: TRAIN AND VALIDATE ON B1, B2, B3. DEPLOY IT TO GENERATE TEST ON EACH DOMAINS')
     
     ################################################# MODEL TRAINER #################################################
-    def model_trainer(self, prefix, suffix, model_id, gen_opt, dis_opt, train_data, val_data, epochs, bs, add_inputs_noise):
+    def model_trainer(self, prefix, suffix, model_id, gen_opt, dis_opt, train_data, val_data, epochs, bs, add_input_noise):
 
         X_train, y_train, S_train = train_data
         X_val, y_val, S_val = val_data
@@ -152,7 +152,7 @@ class RunExperiments:
                 Train UNET/Attention-UNET with WMAE Loss Function -> Deterministic Modelling
                 """
 
-                gen_arch = configure_model(gen_opt, X_train.shape[1:], y_train.shape[1:], S_train.shape[1:], add_inputs_noise) # Edit here
+                gen_arch = configure_model(gen_opt, X_train.shape[1:], y_train.shape[1:], S_train.shape[1:], add_input_noise) # Edit here
 
                 mt = ModelTraining(
                     prefix = prefix, 
@@ -188,8 +188,8 @@ class RunExperiments:
                 """
                 Train SRGAN -> Generative Modelling
                 """
-                gen_arch = configure_model(gen_opt, X_train.shape[1:], y_train.shape[1:], S_train.shape[1:], add_inputs_noise) # Edit here
-                dis_arch = configure_model(dis_opt, X_train.shape[1:], y_train.shape[1:], S_train.shape[1:], add_inputs_noise) # Edit here
+                gen_arch = configure_model(gen_opt, X_train.shape[1:], y_train.shape[1:], S_train.shape[1:], add_input_noise) # Edit here
+                dis_arch = configure_model(dis_opt, X_train.shape[1:], y_train.shape[1:], S_train.shape[1:], add_input_noise) # Edit here
                 
                 mt = SRGAN(
                     prefix = prefix,  

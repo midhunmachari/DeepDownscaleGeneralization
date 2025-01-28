@@ -44,7 +44,7 @@ losses_dict = {
     'wmae': weighted_mae,
     }
 
-def main(prefix, inp_id, exp_id, epochs, data_path, save_path, refd_path, models_dict):
+def main(prefix, exp_id, epochs, data_path, save_path, refd_path, models_dict):
 
     if not (lr_dict and bs_dict and models_dict and losses_dict):
         raise ValueError("One or more required dictionaries are empty. Please check the input.")
@@ -58,7 +58,6 @@ def main(prefix, inp_id, exp_id, epochs, data_path, save_path, refd_path, models
 
         re = RunExperiments( 
             prefix = expname, 
-            inp_id = inp_id, 
             exp_id = exp_id, 
             data_path = data_path, 
             save_path = save_path, 
@@ -67,7 +66,6 @@ def main(prefix, inp_id, exp_id, epochs, data_path, save_path, refd_path, models
             gen_lr = gen_lr, 
             dis_lr = dis_lr, 
             loss_obj = loss,
-            ckpts_dict=None
             )
         
         if exp_id == 'e01': # Train deterministially
@@ -92,7 +90,6 @@ if __name__ == "__main__":
 
     # Add the arguments to the parser
     parser.add_argument('--prefix', type=str, default='rdx', help='Prefix of current experiment')
-    parser.add_argument('--inp_id', type=str, default=None, help='Inputs combination of current experiment')
     parser.add_argument('--exp_id', type=str, default=None, help='Current experiment')
     parser.add_argument('--epochs', type=int, default=10   , help='Number of epochs to train')
     parser.add_argument('--pwd'   , type=str, default='./' , help='Path to present working directory')
@@ -117,7 +114,6 @@ if __name__ == "__main__":
 
     main(
         prefix = args.prefix,
-        inp_id = args.inp_id,
         exp_id = args.exp_id,
         epochs = args.epochs,
         data_path = DATA_PATH,
