@@ -106,7 +106,7 @@ class RunExperiments:
                     varname = 'prec', 
                     start_date = "2001-01-01",  # Edit here
                     end_date   = "2023-12-31",  # Edit here
-                    tag = f"{box_id}_ens{i:02d}", # Edit here
+                    tag = f"c01_ens{i:02d}",    # Edit here
                 )
 
             # -----------------------------    
