@@ -89,11 +89,12 @@ class RunExperiments:
                                     bs = bs, 
                                     add_input_noise = add_input_noise,
                                     )
-
-            # Generate the test netcdf; Loop through all boxes
-            for box_id, box in self.boxes_dict.items(): 
-                # Load testing data
-                X_test, _, S_test = loadstack_data_pairs(box, self.data_path, bounds=self.test_bounds, expset=self.expset_id) # Edit her
+            
+            # ---------------------------
+            # Extract 12 Model Ensembles
+            # ---------------------------
+            for i in range(1,13):
+                X_test, _, S_test = loadstack_data_pairs('C01', self.data_path, bounds=self.test_bounds, add_noise=True, noise_stddev=0.1) # Edit here
 
                 # Generate the test netcdf
                 mt.generate_data_and_build_netcdf(
@@ -105,26 +106,28 @@ class RunExperiments:
                     varname = 'prec', 
                     start_date = "2001-01-01",  # Edit here
                     end_date   = "2023-12-31",  # Edit here
-                    tag = box_id, # Edite here
+                    tag = f"{box_id}_ens{i:02d}", # Edit here
                 )
 
-            if add_input_noise:  
-                ### Prepare 10 ensemble preciction over NE
-                for i in range(1,13):
-                    X_test, _, S_test = loadstack_data_pairs('C01', self.data_path, bounds=self.test_bounds, add_noise=True, noise_stddev=0.1) # Edit here
+            # -----------------------------    
+            # Generate the train test data
+            # -----------------------------
+            for box_id, box in self.boxes_dict.items(): 
+                # Load testing data
+                X_test, _, S_test = loadstack_data_pairs(box, self.data_path, bounds=self.test_bounds, add_noise=False, noise_stddev=0.1) # Edit her
 
-                    # Generate the test netcdf
-                    mt.generate_data_and_build_netcdf(
-                        [X_test, S_test], 
-                        model_path = None,
-                        refd_path=self.get_ref_path(box), 
-                        save_raw_npy=True, # Edit here
-                        build_netcdf=True, # Edit here
-                        varname = 'prec', 
-                        start_date = "2001-01-01",  # Edit here
-                        end_date   = "2023-12-31",  # Edit here
-                        tag = f"{box_id}_ens{i:02d}", # Edite here
-                    )
+                # Generate the test netcdf
+                mt.generate_data_and_build_netcdf(
+                    [X_test, S_test], 
+                    model_path = None,
+                    refd_path=self.get_ref_path(box), 
+                    save_raw_npy=True, # Edit here
+                    build_netcdf=True, # Edit here
+                    varname = 'prec', 
+                    start_date = "2001-01-01",  # Edit here
+                    end_date   = "2023-12-31",  # Edit here
+                    tag = f"{box_id}_det", # Edite here
+                )
 
             del mt
             gc.collect()
