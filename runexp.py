@@ -156,7 +156,13 @@ class RunExperiments:
                 Train UNET/Attention-UNET with WMAE Loss Function -> Deterministic Modelling
                 """
 
-                gen_arch = configure_model(gen_opt, X_train.shape[1:], y_train.shape[1:], S_train.shape[1:], add_input_noise) # Edit here
+                gen_arch = configure_model(
+                       model_id = gen_opt, 
+                       input_shape = X_train.shape[1:], 
+                       target_shape = y_train.shape[1:],
+                       input_shape_2 = S_train.shape[1:], 
+                       add_input_noise = add_input_noise
+                       ) # Edit here
 
                 mt = ModelTraining(
                     prefix = prefix, 

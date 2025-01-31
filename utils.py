@@ -101,15 +101,15 @@ def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add
             input_shape = input_shape, 
             input_shape_2 = input_shape_2, 
             ups_factors = (2,2,2),
-            output_activation='linear',
+            output_activation = 'linear',
             k_size = 3, 
             n = 128,
             d = 64, 
             s = 32,
             m = 4,
             activation = 'prelu',
-            ups_method='convtranspose', 
-            add_input_noise = False,
+            ups_method = 'convtranspose', 
+            add_input_noise = add_input_noise,
             input_noise_stddev = 0.1,
             input_noise_exclude_channels = -1, 
             )
@@ -125,7 +125,7 @@ def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add
             n_ups_filters = 128,
             last_kernel_size = 9,
             activation = 'prelu',
-            ups_method='bilinear', 
+            ups_method = 'bilinear', 
             add_input_noise = add_input_noise, # Edit here
             input_noise_stddev = 0.1,
             input_noise_exclude_channels = -1, 
@@ -142,7 +142,7 @@ def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add
             n_ups_filters = 128,
             last_kernel_size = 9,
             activation = 'prelu',
-            ups_method='bilinear', 
+            ups_method = 'bilinear', 
             add_input_noise = add_input_noise, # Edit here
             input_noise_stddev = 0.1,
             input_noise_exclude_channels = -1, 
@@ -152,41 +152,41 @@ def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add
         return MegaUNet(
             input_shape = input_shape, 
             input_shape_2 = input_shape_2, 
-            lr_ups_size=(8,8),
-            output_activation='linear',
-            convblock_opt='conv',
-            layer_N=[64, 96, 128, 160],
-            activation='prelu',
-            ups_method='bilinear',
-            add_input_noise=add_input_noise, # Edit here
-            input_noise_stddev=0.1,
-            input_noise_exclude_channels=-1,
-            last_conv_filters=32,
-            attention_on=False,
+            lr_ups_size = (8,8),
+            output_activation = 'linear',
+            convblock_opt = 'conv',
+            layer_N = [64, 96, 128, 160],
+            activation = 'prelu',
+            ups_method = 'bilinear',
+            add_input_noise = add_input_noise, # Edit here
+            input_noise_stddev = 0.1,
+            input_noise_exclude_channels = -1,
+            last_conv_filters = 32,
+            attention_on = False,
             ) 
     
     elif model_id=='aunet': # ATT-UNET
         return MegaUNet(
             input_shape = input_shape, 
             input_shape_2 = input_shape_2, 
-            lr_ups_size=(8,8),
-            output_activation='linear',
-            convblock_opt='conv',
-            layer_N=[64, 96, 128, 160],
-            activation='prelu',
-            ups_method='bilinear',
-            add_input_noise=add_input_noise,
-            input_noise_stddev=0.1,
-            input_noise_exclude_channels=-1,
-            last_conv_filters=32,
-            attention_on=True,
+            lr_ups_size = (8,8),
+            output_activation = 'linear',
+            convblock_opt = 'conv',
+            layer_N = [64, 96, 128, 160],
+            activation = 'prelu',
+            ups_method = 'bilinear',
+            add_input_noise = add_input_noise,
+            input_noise_stddev = 0.1,
+            input_noise_exclude_channels = -1,
+            last_conv_filters = 32,
+            attention_on = True,
         )
     
     elif model_id=='sigmoid_dis': # Sigmoid Discriminator
         return Discriminator(
             inputs_shape = target_shape, 
-            layer_N=[64, 96, 128, 160],
-            activation='leaky',
+            layer_N = [64, 96, 128, 160],
+            activation = 'leaky',
             )
     
     else:
