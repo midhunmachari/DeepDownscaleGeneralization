@@ -192,71 +192,72 @@ def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add
     else:
         raise ValueError(f"Invalid model_id: {model_id}. Crosscheck!")
         
-        
-# def loadstack_data_pairs_(boxes, DATA_PATH, bounds=None, concat=True):
-#     """
-#     Load data for the given boxes, stack the inputs, and return arrays for inputs and targets.
 
-#     Args:
-#         boxes (list or str): List of box names or a single box name as a string to process.
-#         DATA_PATH (str): Path to the directory containing the data files.
-#         bounds (tuple, optional): Tuple specifying the start and end indices for slicing the data. Default is None.
-#         expset (str, optional): Experiment set identifier (e.g., 'SET1', 'SET2'). Default is 'SET1'.
-#         concat (bool, optional): If True, return concatenated arrays. Otherwise, return lists of arrays. Default is True.
+ # redundant       
+def loadstack_input_target_pairs(boxes, DATA_PATH, bounds=None, concat=True):
+    """
+    Load data for the given boxes, stack the inputs, and return arrays for inputs and targets.
 
-#     Returns:
-#         tuple: Inputs and targets arrays (either concatenated or as lists).
-#     """
+    Args:
+        boxes (list or str): List of box names or a single box name as a string to process.
+        DATA_PATH (str): Path to the directory containing the data files.
+        bounds (tuple, optional): Tuple specifying the start and end indices for slicing the data. Default is None.
+        expset (str, optional): Experiment set identifier (e.g., 'SET1', 'SET2'). Default is 'SET1'.
+        concat (bool, optional): If True, return concatenated arrays. Otherwise, return lists of arrays. Default is True.
+
+    Returns:
+        tuple: Inputs and targets arrays (either concatenated or as lists).
+    """
     
-#     # Convert a single box string to a list
-#     if isinstance(boxes, str):
-#         boxes = [boxes]
-#         concat = False  # Disable concatenation for a single box
+    # Convert a single box string to a list
+    if isinstance(boxes, str):
+        boxes = [boxes]
+        concat = False  # Disable concatenation for a single box
 
-#     # Check if concatenation is valid
-#     if len(boxes) == 1:
-#         print("\nSingle box detected. Skipping concatenation.")
-#         concat = False
+    # Check if concatenation is valid
+    if len(boxes) == 1:
+        print("\nSingle box detected. Skipping concatenation.")
+        concat = False
 
-#     inputs_list = []
-#     target_list = []
+    inputs_list = []
+    target_list = []
     
-#     for box in boxes:
-#         print(f"\n\tProcessing ... {box}")
+    for box in boxes:
+        print(f"\n\tProcessing ... {box}")
         
-#         # Load input channels for SET1
-#         channels = [ #Edit here
-#             f"{DATA_PATH}/{box}_080_IMRG_PREC_2001_2023_GMEAN_LOG.npy",
-#             f"{DATA_PATH}/{box}_080_IMRG_DCLM_2001_2023_GMEAN_LOG.npy",
-#             f"{DATA_PATH}/{box}_080_GTOP_ELEV_2001_2023_GMEAN_CLOG.npy",    
-#         ]
-#         inputs = np.stack([np.load(ch) for ch in channels], axis=3)
+        # Load input channels for SET1
+        channels = [ #Edit here
+            f"{DATA_PATH}/{box}_080_IMRG_PREC_2001_2023_GMEAN_LOG.npy",
+            f"{DATA_PATH}/{box}_080_IMRG_DCLM_2001_2023_GMEAN_LOG.npy",
+            f"{DATA_PATH}/{box}_080_GTOP_ELEV_2001_2023_GMEAN_CLOG.npy",    
+        ]
+        inputs = np.stack([np.load(ch) for ch in channels], axis=3)
         
-#         # Load and expand target channel
-#         target = np.load(f"{DATA_PATH}/{box}_010_IMRG_PREC_2001_2023_LOG.npy")
-#         target = np.expand_dims(target, axis=-1)
+        # Load and expand target channel
+        target = np.load(f"{DATA_PATH}/{box}_010_IMRG_PREC_2001_2023_LOG.npy")
+        target = np.expand_dims(target, axis=-1)
         
-#         # Apply bounds if specified
-#         if bounds is not None:
-#             inputs = inputs[bounds[0]:bounds[1]]
-#             target = target[bounds[0]:bounds[1]]
+        # Apply bounds if specified
+        if bounds is not None:
+            inputs = inputs[bounds[0]:bounds[1]]
+            target = target[bounds[0]:bounds[1]]
         
-#         # Append to lists
-#         inputs_list.append(inputs)
-#         target_list.append(target)
+        # Append to lists
+        inputs_list.append(inputs)
+        target_list.append(target)
         
-#         print(f"\tShape of {box} inputs array: {inputs.shape}")
-#         print(f"\tShape of {box} target array: {target.shape}")
+        print(f"\tShape of {box} inputs array: {inputs.shape}")
+        print(f"\tShape of {box} target array: {target.shape}")
     
-#     if concat:
-#         # Concatenate all inputs and targets
-#         inputs_array = np.concatenate(inputs_list, axis=0)
-#         target_array = np.concatenate(target_list, axis=0)
+    if concat:
+        # Concatenate all inputs and targets
+        inputs_array = np.concatenate(inputs_list, axis=0)
+        target_array = np.concatenate(target_list, axis=0)
         
-#         print(f"\nFinal concatenated inputs shape: {inputs_array.shape}")
-#         print(f"Final concatenated targets shape: {target_array.shape}")
+        print(f"\nFinal concatenated inputs shape: {inputs_array.shape}")
+        print(f"Final concatenated targets shape: {target_array.shape}")
         
-#         return inputs_array, target_array
-#     else:
-#         # Return lists if concatenation is not required
-#         return inputs_list[0], target_list[0] if len(boxes) == 1 else (inputs_list, target_list)
+        return inputs_array, target_array
+    else:
+        # Return lists if concatenation is not required
+        return inputs_list[0], target_list[0] if len(boxes) == 1 else (inputs_list, target_list)
