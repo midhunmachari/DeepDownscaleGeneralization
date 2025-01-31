@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=e1m18
-#SBATCH --error=e1m18.%J.err
-#SBATCH --output=e1m18.%J.out
+#SBATCH --job-name=e2m18
+#SBATCH --error=e2m18.%J.err
+#SBATCH --output=e2m18.%J.out
 #SBATCH --partition=testp
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
@@ -13,7 +13,7 @@ PREFIX="${1:-p02a}"
 EPOCHS="${2:-201}"
 SCRIPTNAME='main.py' 
 
-EXP_ID=e01
+EXP_ID=e02
 ####################### EDIT ABOVE #######################
 
 # Display help message if "--help" is passed

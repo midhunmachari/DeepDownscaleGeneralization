@@ -94,6 +94,7 @@ class RunExperiments:
             # Extract 12 Model Ensembles
             # ---------------------------
             for i in range(1,13):
+                print(f"\nGenerating ensemble: {i:02d}")
                 X_test, _, S_test = loadstack_data_pairs('C01', self.data_path, bounds=self.test_bounds, add_noise=True, noise_stddev=0.1) # Edit here
 
                 # Generate the test netcdf
