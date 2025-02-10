@@ -94,11 +94,12 @@ def loadstack_data_pairs(boxes, DATA_PATH, bounds=None, concat=True,
             return inputs_list, target_list, static_list
 
 
-def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add_input_noise=False):
+def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add_input_noise=False, input_noise_stddev=0.1):
     
     if model_id == 'fsrcnn': # FSRCNN
         return FSRCNN(
-            input_shape = input_shape, 
+            input_shape = input_shape,
+            target_shape = target_shape,
             input_shape_2 = input_shape_2, 
             ups_factors = (2,2,2),
             output_activation = 'linear',
@@ -108,17 +109,17 @@ def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add
             s = 32,
             m = 4,
             activation = 'prelu',
-            ups_method = 'convtranspose', 
+            ups_method = 'bilinear', 
             add_input_noise = add_input_noise,
-            input_noise_stddev = 0.1,
-            input_noise_exclude_channels = -1, 
+            input_noise_stddev = input_noise_stddev,
             )
     
-    elif model_id == 'edrn': # EDRN
+    elif model_id == 'edrn': # EDRN 
         return EDRN(
-            input_shape = input_shape, 
+            input_shape = input_shape,
+            target_shape = target_shape,
             input_shape_2 = input_shape_2, 
-            ups_factors = (2,2,2),
+            ups_blocks_factors = (2,2,2),
             output_activation='linear',
             n_filters = 64,
             n_res_blocks = 16, 
@@ -127,15 +128,15 @@ def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add
             activation = 'prelu',
             ups_method = 'bilinear', 
             add_input_noise = add_input_noise, # Edit here
-            input_noise_stddev = 0.1,
-            input_noise_exclude_channels = -1, 
+            input_noise_stddev = input_noise_stddev,
             )
     
-    elif model_id == 'srdrn': # SRDRN
+    elif model_id == 'srdrn': # SRDRN 
         return SRDRN(
-            input_shape = input_shape, 
+            input_shape = input_shape,
+            target_shape = target_shape, 
             input_shape_2 = input_shape_2, 
-            ups_factors = (2,2,2),
+            ups_blocks_factors = (2,2,2),
             output_activation='linear',
             n_filters = 64,
             n_res_blocks = 16, 
@@ -144,45 +145,44 @@ def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add
             activation = 'prelu',
             ups_method = 'bilinear', 
             add_input_noise = add_input_noise, # Edit here
-            input_noise_stddev = 0.1,
-            input_noise_exclude_channels = -1, 
+            input_noise_stddev = input_noise_stddev,
             )
     
-    elif model_id == 'unet': # UNET
+    elif model_id == 'unet': # UNET 
         return MegaUNet(
             input_shape = input_shape, 
+            target_shape = target_shape,
             input_shape_2 = input_shape_2, 
-            lr_ups_size = (8,8),
+            # lr_ups_size = (8,8),
             output_activation = 'linear',
             convblock_opt = 'conv',
             layer_N = [64, 96, 128, 160],
             activation = 'prelu',
             ups_method = 'bilinear',
             add_input_noise = add_input_noise, # Edit here
-            input_noise_stddev = 0.1,
-            input_noise_exclude_channels = -1,
+            input_noise_stddev = input_noise_stddev,
             last_conv_filters = 32,
             attention_on = False,
             ) 
     
-    elif model_id=='aunet': # ATT-UNET
+    elif model_id=='aunet': # ATT-UNET 
         return MegaUNet(
-            input_shape = input_shape, 
+            input_shape = input_shape,
+            target_shape = target_shape,
             input_shape_2 = input_shape_2, 
-            lr_ups_size = (8,8),
+            # lr_ups_size = (8,8),
             output_activation = 'linear',
             convblock_opt = 'conv',
             layer_N = [64, 96, 128, 160],
             activation = 'prelu',
             ups_method = 'bilinear',
             add_input_noise = add_input_noise,
-            input_noise_stddev = 0.1,
-            input_noise_exclude_channels = -1,
+            input_noise_stddev = input_noise_stddev,
             last_conv_filters = 32,
             attention_on = True,
         )
     
-    elif model_id=='sigmoid_dis': # Sigmoid Discriminator
+    elif model_id=='sigmoid_dis': # Sigmoid Discriminator 
         return Discriminator(
             inputs_shape = target_shape, 
             layer_N = [64, 96, 128, 160],
@@ -192,7 +192,21 @@ def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add
     else:
         raise ValueError(f"Invalid model_id: {model_id}. Crosscheck!")
         
+#%% Test the model configurations
+    
+# for model in ['fsrcnn', 'edrn', 'srdrn', 'unet', 'aunet', 'sigmoid_dis']:
+    
+#     m = configure_model(model_id = model, 
+#                         input_shape = (16, 16, 2), 
+#                         target_shape = (128, 128, 1), 
+#                         input_shape_2 = (16, 16, 1), 
+#                         add_input_noise=False,
+#                         input_noise_stddev=0.1
+#                         )
 
+#     print(m.summary())
+
+###
  # redundant       
 def loadstack_input_target_pairs(boxes, DATA_PATH, bounds=None, concat=True):
     """

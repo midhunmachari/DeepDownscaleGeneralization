@@ -178,8 +178,8 @@ class RunExperiments:
                     train_data = (X_train, S_train, y_train), 
                     val_data = (X_val, S_val, y_val), 
                     epochs = epochs,  # Edit here
-                    batch_size = bs, 
-                    monitor="val_mean_absolute_error",
+                    batch_size = bs,  
+                    monitor="val_loss", # Edit here
                     mode = "min",
                     min_lr = 1e-10,
                     save_ckpt = True,

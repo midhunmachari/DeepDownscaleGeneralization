@@ -1,0 +1,64 @@
+#!/bin/bash
+#PBS -N e1m18                  
+#PBS -o e1m18.$PBS_JOBID.out   
+#PBS -e e1m18.$PBS_JOBID.err   
+#PBS -q gpu                    
+#PBS -l select=1:ncpus=24:mpiprocs=24
+#PBS -l walltime=24:00:00
+
+# Activate the conda environment
+source /lhome/kumarp/miniconda3/bin/activate tf2
+conda list
+
+####################### EDIT BELOW #######################
+PREFIX="${1:-p02a}"   
+EPOCHS="${2:-201}"
+SCRIPTNAME='main.py' 
+
+EXP_ID=e01
+####################### EDIT ABOVE #######################
+
+# Display help message if "--help" is passed
+if [[ "$1" == "--help" ]]; then
+    echo "Usage: $(basename "$0") [PREFIX] [RUN_ID] [EPOCHS]"
+    echo ""
+    echo "Arguments:"
+    echo "  PREFIX    Optional. Prefix for the run. Default: p05"
+    echo "  EPOCHS    Optional. Number of epochs for training. Default: 101"
+    exit 0
+fi
+
+# Detect working directory and normalize paths
+PWD=$(pwd)
+if [[ "$PWD" == /nlsasfs/* ]]; then
+    WRKDIR="$PWD"
+elif [[ "$PWD" == /mnt/* ]]; then
+    WRKDIR="/nlsasfs${PWD#/mnt}"
+else
+    echo "Error: Cannot determine correct path mapping for $PWD"
+    exit 1
+fi
+
+WRKDIR=$PWD
+
+echo "Working directory set to: $WRKDIR"
+echo ""
+
+# Check if main.py exists in the normalized path
+if [[ ! -f "$WRKDIR/$SCRIPTNAME" ]]; then
+    echo "Error: Cannot find $SCRIPTNAME in $WRKDIR"
+    exit 1
+fi
+
+# Execute the Python script
+echo ''
+echo "Starting ... ${PREFIX} for ${EPOCHS} epochs."
+python3 "$WRKDIR/$SCRIPTNAME" \
+        --pwd "$WRKDIR" \
+        --exp_id "$EXP_ID" \
+        --prefix "$PREFIX" \
+        --epochs "$EPOCHS"
+
+# Print completion message
+echo "Job exit at $(date '+%Y-%m-%d %H:%M:%S')"
+

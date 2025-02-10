@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=e2m18
+#SBATCH --job-name=e1m18
 #SBATCH --error=e2m18.%J.err
 #SBATCH --output=e2m18.%J.out
 #SBATCH --partition=testp
@@ -8,12 +8,16 @@
 #SBATCH --gres=gpu:A100-SXM4:1
 #SBATCH --time=72:00:00
 
+# Activate the conda environment
+source /nlsasfs/home/precipitation/midhunm/Conda/bin/activate tf2
+conda list
+
 ####################### EDIT BELOW #######################
 PREFIX="${1:-p02a}"   
 EPOCHS="${2:-201}"
 SCRIPTNAME='main.py' 
 
-EXP_ID=e02
+EXP_ID=e01
 ####################### EDIT ABOVE #######################
 
 # Display help message if "--help" is passed
@@ -47,10 +51,6 @@ if [[ ! -f "$WRKDIR/$SCRIPTNAME" ]]; then
     echo "Error: Cannot find $SCRIPTNAME in $WRKDIR"
     exit 1
 fi
-
-# Activate the conda environment
-source /nlsasfs/home/precipitation/midhunm/Conda/bin/activate tf2
-conda list
 
 # Execute the Python script
 echo ''
