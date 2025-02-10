@@ -29,17 +29,7 @@ if [[ "$1" == "--help" ]]; then
 fi
 
 # Detect working directory and normalize paths
-PWD=$(pwd)
-if [[ "$PWD" == /nlsasfs/* ]]; then
-    WRKDIR="$PWD"
-elif [[ "$PWD" == /mnt/* ]]; then
-    WRKDIR="/nlsasfs${PWD#/mnt}"
-else
-    echo "Error: Cannot determine correct path mapping for $PWD"
-    exit 1
-fi
-
-WRKDIR=$PWD
+WRKDIR=$(pwd)
 
 echo "Working directory set to: $WRKDIR"
 echo ""
