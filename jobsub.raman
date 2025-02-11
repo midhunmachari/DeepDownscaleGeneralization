@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -N e1m18                  
-#PBS -o e1m18.${PBS_JOBID}.out   
-#PBS -e e1m18.${PBS_JOBID}.err   
+#PBS -o e1m18.out   
+#PBS -e e1m18.err   
 #PBS -q gpu                    
 #PBS -l select=1:ncpus=24:mpiprocs=24
 #PBS -l walltime=24:00:00
@@ -34,11 +34,14 @@ echo ""
 echo "Working directory set to: $WRKDIR"
 echo ""
 
-# Check if main.py exists in the normalized path
-if [[ ! -f "$WRKDIR/$SCRIPTNAME" ]]; then
-    echo "Error: Cannot find $SCRIPTNAME in $WRKDIR"
-    exit 1
-fi
+# # Check if main.py exists in the normalized path
+# if [[ ! -f "$WRKDIR/$SCRIPTNAME" ]]; then
+#     echo "Error: Cannot find $SCRIPTNAME in $WRKDIR"
+#     exit 1
+# fi
+
+echo "Checking ..."
+ls "$WRKDIR/$SCRIPTNAME"
 
 # Execute the Python script
 echo ''
