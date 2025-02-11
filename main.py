@@ -31,7 +31,7 @@ def weighted_mae(y_true, y_pred):
 
 lr_dict = {
     'r1e4' : [1e-4, 1e-4],
-    # 'r7e4' : [7e-4, 7e-4],
+    'r7e4' : [7e-4, 7e-4],
     # 'r2e4' : [2e-4, 2e-4],
     # 'r3e4' : [3e-4, 3e-4],
     # 'r1e5' : [1e-5, 1e-5],
