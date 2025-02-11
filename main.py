@@ -97,10 +97,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     models_dict = {
-        'm01': ['fsrcnn',  None],         # FSRCNN
-        'm02': ['edrn'  ,  None],         # EDRN
-        'm03': ['srdrn' ,  None],         # SRDRN
-        'm04': ['unet'  ,  None],         # UNET
+        # 'm01': ['fsrcnn',  None],         # FSRCNN
+        # 'm02': ['edrn'  ,  None],         # EDRN
+        # 'm03': ['srdrn' ,  None],         # SRDRN
+        # 'm04': ['unet'  ,  None],         # UNET
         'm05': ['aunet' ,  None],         # AUNET
         'm06': ['srdrn' , 'sigmoid_dis'], # SR-GAN  
         'm07': ['unet'  , 'sigmoid_dis'], # UNET-GAN
