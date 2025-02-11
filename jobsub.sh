@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=e1m18
-#SBATCH --error=e2m18.%J.err
-#SBATCH --output=e2m18.%J.out
+#SBATCH --job-name=p2e1m18
+#SBATCH --error=p2e1m18.%J.err
+#SBATCH --output=p2e1m18.%J.out
 #SBATCH --partition=testp
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
