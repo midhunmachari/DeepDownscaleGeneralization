@@ -151,7 +151,7 @@ class RunExperiments:
         try:
             
             ################################# TRAIN: FSRCNN, SRDRN, UNET, AUNET #################################
-            if model_id in ['m01', 'm02', 'm03', 'm04']:
+            if model_id in ['m01', 'm02', 'm03', 'm04', 'm05']:
                 """
                 Train UNET/Attention-UNET with WMAE Loss Function -> Deterministic Modelling
                 """
@@ -193,7 +193,7 @@ class RunExperiments:
                     )
 
             ################################# TRAIN: SRGAN #################################
-            elif model_id in ['m05', 'm06', 'm07', 'm08']: # SRGAN
+            elif model_id in ['m06', 'm07', 'm08']: # SRGAN
 
                 """
                 Train SRGAN -> Generative Modelling
