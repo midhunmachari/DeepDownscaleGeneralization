@@ -16,7 +16,7 @@ EPOCHS="${2:-201}"
 SCRIPTNAME='main.py' 
 DATA_PATH="/lhome/kumarp/MidhunM/DATASET/DATA_P02"
 REFD_PATH="/lhome/kumarp/MidhunM/DATASET/DATA_P02/grid_masks"
-WRKDIR=$PWD #"/lhome/kumarp/MidhunM/EXPMNTS/P02A.Q01/codes_p02a" #$(pwd)
+WRKDIR="/lhome/kumarp/MidhunM/EXPMNTS/P02A.Q01/codes_p02a"
 EXP_ID=e01
 ####################### EDIT ABOVE #######################
 
@@ -30,6 +30,7 @@ if [[ "$1" == "--help" ]]; then
     exit 0
 fi
 
+echo ""
 echo "Working directory set to: $WRKDIR"
 echo ""
 

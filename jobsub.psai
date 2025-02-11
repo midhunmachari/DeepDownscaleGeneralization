@@ -43,6 +43,7 @@ else
     exit 1
 fi
 
+echo ""
 echo "Working directory set to: $WRKDIR"
 echo ""
 
