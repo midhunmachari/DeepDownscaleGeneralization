@@ -19,12 +19,12 @@ else:
   print("TensorFlow **IS NOT** using the GPU")
 
 from runexp import RunExperiments
-# from ai4klima.tensorflow.losses import weighted_mae
-import tensorflow.keras.backend as K
+from ai4klima.tensorflow.losses import weighted_mae
+# import tensorflow.keras.backend as K
 
-def weighted_mae(y_true, y_pred):
-  weights= tf.clip_by_value(y_true, K.log(0.1+1), K.log(100.0+1))
-  return K.mean(tf.multiply(weights, tf.abs(tf.subtract(y_pred, y_true))))
+# def weighted_mae(y_true, y_pred):
+#   weights= tf.clip_by_value(y_true, K.log(0.1+1), K.log(100.0+1))
+#   return K.mean(tf.multiply(weights, tf.abs(tf.subtract(y_pred, y_true))))
 
     
 #%% The training block
@@ -97,14 +97,14 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     models_dict = {
-        # 'm01': ['fsrcnn',  None],         # FSRCNN
-        # 'm02': ['edrn'  ,  None],         # EDRN
-        # 'm03': ['srdrn' ,  None],         # SRDRN
-        # 'm04': ['unet'  ,  None],         # UNET
-        # 'm05': ['aunet' ,  None],         # AUNET
-        'm06': ['srdrn' , 'sigmoid_dis'], # SR-GAN  
-        'm07': ['unet'  , 'sigmoid_dis'], # UNET-GAN
-        'm08': ['aunet' , 'sigmoid_dis'], # AUNET-GAN    
+        'm01': ['fsrcnn',  None],         # FSRCNN
+        'm02': ['edrn'  ,  None],         # EDRN
+        'm03': ['srdrn' ,  None],         # SRDRN
+        'm04': ['unet'  ,  None],         # UNET
+        'm05': ['aunet' ,  None],         # AUNET
+        # 'm06': ['srdrn' , 'sigmoid_dis'], # SR-GAN  
+        # 'm07': ['unet'  , 'sigmoid_dis'], # UNET-GAN
+        # 'm08': ['aunet' , 'sigmoid_dis'], # AUNET-GAN    
         }
 
     main(

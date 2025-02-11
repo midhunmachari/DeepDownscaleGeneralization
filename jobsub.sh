@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=p2e1m18
-#SBATCH --error=p2e1m18.%J.err
-#SBATCH --output=p2e1m18.%J.out
+#SBATCH --job-name=p2e1m15
+#SBATCH --error=p2e1m15.%J.err
+#SBATCH --output=p2e1m15.%J.out
 #SBATCH --partition=testp
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
@@ -9,7 +9,7 @@
 #SBATCH --time=72:00:00
 
 # Activate the conda environment
-source /nlsasfs/home/precipitation/midhunm/Conda/bin/activate tf2
+source /nlsasfs/home/precipitation/midhunm/Conda/bin/activate tf2 # Edit here
 conda list
 
 ####################### EDIT BELOW #######################
