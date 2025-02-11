@@ -16,8 +16,8 @@ conda list
 PREFIX="${1:-p02a}"   
 EPOCHS="${2:-201}"
 SCRIPTNAME='main.py' 
-REFD_PATH="/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02A/grid_masks"
-DATA_PATH="/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02A"
+REFD_PATH="/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02/grid_masks"
+DATA_PATH="/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02"
 WRKDIR=$PWD
 EXP_ID=e01
 ####################### EDIT ABOVE #######################
