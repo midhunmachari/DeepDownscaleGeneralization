@@ -19,7 +19,12 @@ else:
   print("TensorFlow **IS NOT** using the GPU")
 
 from runexp import RunExperiments
-from ai4klima.tensorflow.losses import weighted_mae
+# from ai4klima.tensorflow.losses import weighted_mae
+import tensorflow.keras.backend as K
+
+def weighted_mae(y_true, y_pred):
+  weights= tf.clip_by_value(y_true, K.log(0.1+1), K.log(100.0+1))
+  return K.mean(tf.multiply(weights, tf.abs(tf.subtract(y_pred, y_true))))
 
     
 #%% The training block
