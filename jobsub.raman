@@ -17,7 +17,7 @@ SCRIPTNAME='main.py'
 DATA_PATH="/lhome/kumarp/MidhunM/DATASET/DATA_P02"
 REFD_PATH="/lhome/kumarp/MidhunM/DATASET/DATA_P02/grid_masks"
 WRKDIR="/lhome/kumarp/MidhunM/EXPMNTS/P02A.Q01/codes_p02a"
-EXP_ID=e01
+# EXP_ID=e01
 ####################### EDIT ABOVE #######################
 
 # Display help message if "--help" is passed
@@ -47,8 +47,10 @@ nvidia-smi
 
 
 # Execute the Python script
+
+for EXP_ID in e01 e02; do
 echo ''
-echo "Starting ... ${PREFIX} for ${EPOCHS} epochs."
+echo "Starting ... ${PREFIX} ${EXP_ID} for ${EPOCHS} epochs."
 python3 "$WRKDIR/$SCRIPTNAME" \
         --pwd "$WRKDIR" \
         --exp_id "$EXP_ID" \
@@ -57,6 +59,7 @@ python3 "$WRKDIR/$SCRIPTNAME" \
         --dpath "$DATA_PATH" \
         --rpath "$REFD_PATH"
 
+done
 # Print completion message
 echo "Job exit at $(date '+%Y-%m-%d %H:%M:%S')"
 
