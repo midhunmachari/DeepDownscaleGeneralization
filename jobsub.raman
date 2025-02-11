@@ -42,6 +42,9 @@ echo ""
 
 echo "Checking ..."
 ls "$WRKDIR/$SCRIPTNAME"
+nvcc --version
+nvidia-smi
+
 
 # Execute the Python script
 echo ''
