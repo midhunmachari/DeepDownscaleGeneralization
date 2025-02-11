@@ -229,7 +229,7 @@ class RunExperiments:
                     reducelr_on_plateau_gen = True,
                     reducelr_factor_gen = 0.1,
                     reducelr_patience_gen = 12,
-                    early_stopping=False,
+                    early_stopping=True,
                     early_stopping_patience = 32,
                     )
 
