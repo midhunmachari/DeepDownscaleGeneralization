@@ -29,7 +29,7 @@ if [[ "$1" == "--help" ]]; then
 fi
 
 # Detect working directory and normalize paths
-WRKDIR=$(pwd)
+WRKDIR="/lhome/kumarp/MidhunM/EXPMNTS/P02A.Q01/codes_p02a" #$(pwd)
 
 echo "Working directory set to: $WRKDIR"
 echo ""
