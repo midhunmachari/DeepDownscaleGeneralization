@@ -98,10 +98,6 @@ if __name__ == "__main__":
     # Parse the command-line arguments
     args = parser.parse_args()
 
-    #### EDIT BELOW ####
-    
-    SAVE_PATH = f"{args.pwd}/.."
-
     models_dict = {
         'm01': ['fsrcnn',  None],         # FSRCNN
         'm02': ['edrn'  ,  None],         # EDRN
@@ -117,9 +113,9 @@ if __name__ == "__main__":
         prefix = args.prefix,
         exp_id = args.exp_id,
         epochs = args.epochs,
-        data_path = DATA_PATH,
-        save_path = SAVE_PATH,
-        refd_path = REFD_PATH,
+        data_path = args.dpath,
+        save_path = f"{args.pwd}/..",
+        refd_path = args.rpath,
         models_dict = models_dict,
         )
     
