@@ -14,7 +14,9 @@ conda list
 PREFIX="${1:-p02a}"   
 EPOCHS="${2:-201}"
 SCRIPTNAME='main.py' 
-
+DATA_PATH="/lhome/kumarp/MidhunM/DATASET/DATA_P02"
+REFD_PATH="/lhome/kumarp/MidhunM/DATASET/DATA_P02/grid_masks"
+WRKDIR=$PWD #"/lhome/kumarp/MidhunM/EXPMNTS/P02A.Q01/codes_p02a" #$(pwd)
 EXP_ID=e01
 ####################### EDIT ABOVE #######################
 
@@ -27,9 +29,6 @@ if [[ "$1" == "--help" ]]; then
     echo "  EPOCHS    Optional. Number of epochs for training. Default: 101"
     exit 0
 fi
-
-# Detect working directory and normalize paths
-WRKDIR=${PWD} #"/lhome/kumarp/MidhunM/EXPMNTS/P02A.Q01/codes_p02a" #$(pwd)
 
 echo "Working directory set to: $WRKDIR"
 echo ""
@@ -47,7 +46,9 @@ python3 "$WRKDIR/$SCRIPTNAME" \
         --pwd "$WRKDIR" \
         --exp_id "$EXP_ID" \
         --prefix "$PREFIX" \
-        --epochs "$EPOCHS"
+        --epochs "$EPOCHS" \
+        --dpath "$DATA_PATH" \
+        --rpath "$REFD_PATH"
 
 # Print completion message
 echo "Job exit at $(date '+%Y-%m-%d %H:%M:%S')"

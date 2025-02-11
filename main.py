@@ -93,12 +93,13 @@ if __name__ == "__main__":
     parser.add_argument('--exp_id', type=str, default=None, help='Current experiment')
     parser.add_argument('--epochs', type=int, default=10   , help='Number of epochs to train')
     parser.add_argument('--pwd'   , type=str, default='./' , help='Path to present working directory')
+    parser.add_argument('--dpath' , type=str, default='./' , help='Path to Data directory')
+    parser.add_argument('--rpath'   , type=str, default='./' , help='Path to reference data grid directory')
     # Parse the command-line arguments
     args = parser.parse_args()
 
     #### EDIT BELOW ####
-    REFD_PATH = "/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02A/grid_masks"
-    DATA_PATH = "/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02A"
+    
     SAVE_PATH = f"{args.pwd}/.."
 
     models_dict = {

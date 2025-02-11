@@ -16,7 +16,9 @@ conda list
 PREFIX="${1:-p02a}"   
 EPOCHS="${2:-201}"
 SCRIPTNAME='main.py' 
-
+REFD_PATH="/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02A/grid_masks"
+DATA_PATH="/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02A"
+WRKDIR=$PWD
 EXP_ID=e01
 ####################### EDIT ABOVE #######################
 
@@ -41,8 +43,6 @@ else
     exit 1
 fi
 
-WRKDIR=$PWD
-
 echo "Working directory set to: $WRKDIR"
 echo ""
 
@@ -59,7 +59,9 @@ python3 "$WRKDIR/$SCRIPTNAME" \
         --pwd "$WRKDIR" \
         --exp_id "$EXP_ID" \
         --prefix "$PREFIX" \
-        --epochs "$EPOCHS"
+        --epochs "$EPOCHS" \
+        --dpath "$DATA_PATH" \
+        --rpath "$REFD_PATH"
 
 # Print completion message
 echo "Job exit at $(date '+%Y-%m-%d %H:%M:%S')"
