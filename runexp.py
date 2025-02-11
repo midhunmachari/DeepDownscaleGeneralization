@@ -115,7 +115,7 @@ class RunExperiments:
             # -----------------------------
             for box_id, box in self.boxes_dict.items(): 
                 # Load testing data
-                X_test, _, S_test = loadstack_data_pairs(box, self.data_path, bounds=self.test_bounds, add_noise=False, noise_stddev=0.1) # Edit her
+                X_test, _, S_test = loadstack_data_pairs(box, self.data_path, bounds=self.test_bounds, add_noise=False) # Edit her
 
                 # Generate the test netcdf
                 mt.generate_data_and_build_netcdf(
