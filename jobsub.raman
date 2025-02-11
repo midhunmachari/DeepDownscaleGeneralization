@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -N e1m18                  
-#PBS -o e1m18.out   
-#PBS -e e1m18.err   
+#PBS -o e1m18.${PBS_JOBID}.out   
+#PBS -e e1m18.${PBS_JOBID}.err   
 #PBS -q gpu                    
 #PBS -l select=1:ncpus=24:mpiprocs=24
 #PBS -l walltime=24:00:00
