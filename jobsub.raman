@@ -34,11 +34,11 @@ echo ""
 echo "Working directory set to: $WRKDIR"
 echo ""
 
-# # Check if main.py exists in the normalized path
-# if [[ ! -f "$WRKDIR/$SCRIPTNAME" ]]; then
-#     echo "Error: Cannot find $SCRIPTNAME in $WRKDIR"
-#     exit 1
-# fi
+# Check if main.py exists in the normalized path
+if [[ ! -f "$WRKDIR/$SCRIPTNAME" ]]; then
+    echo "Error: Cannot find $SCRIPTNAME in $WRKDIR"
+    exit 1
+fi
 
 echo "Checking ..."
 ls "$WRKDIR/$SCRIPTNAME"
