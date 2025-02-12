@@ -115,7 +115,7 @@ class RunExperiments:
             # -----------------------------
             for box_id, box in self.boxes_dict.items(): 
                 # Load testing data
-                X_test, _, S_test = loadstack_data_pairs(box, self.data_path, bounds=self.test_bounds, add_noise=False) # Edit her
+                X_test, _, S_test = loadstack_data_pairs(box, self.data_path, bounds=self.test_bounds, add_noise=False) # Edit here
 
                 # Generate the test netcdf
                 mt.generate_data_and_build_netcdf(
@@ -127,7 +127,7 @@ class RunExperiments:
                     varname = 'prec', 
                     start_date = "2001-01-01",  # Edit here
                     end_date   = "2023-12-31",  # Edit here
-                    tag = f"{box_id}_det00", # Edite here
+                    tag = f"{box_id}_det00", # Edit here
                 )
 
             del mt
@@ -174,6 +174,7 @@ class RunExperiments:
                     enable_function = True,
                     suffix = suffix,
                     )
+                
                 mt.train_by_fit(
                     train_data = (X_train, S_train, y_train), 
                     val_data = (X_val, S_val, y_val), 
@@ -216,7 +217,7 @@ class RunExperiments:
                     )
                 mt.train(
                     train_data = (X_train, S_train, y_train),
-                    val_data = (X_val, S_train, y_val),
+                    val_data = (X_val, S_val, y_val),
                     epochs = epochs, 
                     batch_size = bs,
                     monitor= "val_mean_absolute_error", 
