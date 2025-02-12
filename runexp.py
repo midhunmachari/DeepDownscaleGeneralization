@@ -14,7 +14,6 @@ from utils import configure_model, loadstack_data_pairs
 
 from ai4klima.tensorflow.train import ModelTraining, SRGAN
 
-
 class RunExperiments:
     
     def __init__(
@@ -149,7 +148,7 @@ class RunExperiments:
         print(f"S_val shape: {S_val[:,:,:,0].shape}, S_val max.: {S_val[:,:,:,0].max()}")
 
         try:
-            
+
             ################################# TRAIN: FSRCNN, SRDRN, UNET, AUNET #################################
             if model_id in ['m01', 'm02', 'm03', 'm04', 'm05']:
                 """

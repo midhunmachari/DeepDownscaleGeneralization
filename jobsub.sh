@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=p2e1m68
-#SBATCH --error=p2e1m68.%J.err
-#SBATCH --output=p2e1m68.%J.out
+#SBATCH --job-name=p2e2m68
+#SBATCH --error=p2e2m68.%J.err
+#SBATCH --output=p2e2m68.%J.out
 #SBATCH --partition=testp
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
@@ -19,7 +19,7 @@ SCRIPTNAME='main.py'
 REFD_PATH="/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02/grid_masks"
 DATA_PATH="/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02"
 WRKDIR=$PWD
-EXP_ID=e01
+EXP_ID=e02
 ####################### EDIT ABOVE #######################
 
 # Display help message if "--help" is passed
