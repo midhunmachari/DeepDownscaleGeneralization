@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import tensorflow as tf
-from ai4klima.tensorflow.models import FSRCNN, SRDRN, EDRN, MegaUNet, Discriminator
+from ai4klima.tensorflow.models import SRCNN, FSRCNN, SRDRN, EDRN, MegaUNet, Discriminator
 
 def loadstack_data_pairs(boxes, DATA_PATH, bounds=None, concat=True,
                         add_noise=False, noise_stddev=0.1):
@@ -96,7 +96,21 @@ def loadstack_data_pairs(boxes, DATA_PATH, bounds=None, concat=True,
 
 def configure_model(model_id, input_shape, target_shape, input_shape_2=None, add_input_noise=False, input_noise_stddev=0.1):
     
-    if model_id == 'fsrcnn': # FSRCNN
+    if model_id == 'srcnn':
+        return SRCNN(
+            input_shape = input_shape,
+            target_shape = target_shape,
+            input_shape_2 = input_shape_2,
+            n_classes = 1,
+            output_activation='linear',
+            last_kernel_size = 5,
+            last_kernel_stride = 1,
+            activation = 'prelu',
+            add_input_noise = add_input_noise,
+            input_noise_stddev = input_noise_stddev,
+            )
+    
+    elif model_id == 'fsrcnn': # FSRCNN
         return FSRCNN(
             input_shape = input_shape,
             target_shape = target_shape,
