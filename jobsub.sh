@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=p2e1m0
-#SBATCH --error=p2e1m0.%J.err
-#SBATCH --output=p2e1m0.%J.out
+#SBATCH --job-name=p2e12m0
+#SBATCH --error=p2e12m0.%J.err
+#SBATCH --output=p2e12m0.%J.out
 #SBATCH --partition=testp
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
@@ -19,7 +19,7 @@ SCRIPTNAME='main.py'
 REFD_PATH="/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02/grid_masks"
 DATA_PATH="/nlsasfs/home/precipitation/midhunm/AI4KLIM/DATASET/DATA_P02"
 WRKDIR=$PWD
-EXP_ID=e01
+# EXP_ID=e01
 ####################### EDIT ABOVE #######################
 
 # Display help message if "--help" is passed
@@ -53,7 +53,8 @@ if [[ ! -f "$WRKDIR/$SCRIPTNAME" ]]; then
     exit 1
 fi
 
-# Execute the Python script
+# Execute the Python script for e01 and e02
+for EXP_ID in e01 e02; do
 echo ''
 echo "Starting ... ${PREFIX} for ${EPOCHS} epochs."
 python3 "$WRKDIR/$SCRIPTNAME" \
@@ -63,6 +64,7 @@ python3 "$WRKDIR/$SCRIPTNAME" \
         --epochs "$EPOCHS" \
         --dpath "$DATA_PATH" \
         --rpath "$REFD_PATH"
+done
 
 # Print completion message
 echo "Job exit at $(date '+%Y-%m-%d %H:%M:%S')"
