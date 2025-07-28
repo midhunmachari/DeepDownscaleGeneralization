@@ -1,4 +1,5 @@
-# codes_p02
-P02A_DeepDown_Generalization
+# DeepDownscaleGeneralation
 
-Link: https://github.com/midhunmachari/codes_p02a.git
+Generalization of advanced deep learning models for precipitation downscaling: An assessment over the Indian subcontinent
+
+Author: midhun Murukesh & Pankaj Kumar
